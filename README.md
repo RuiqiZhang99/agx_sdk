@@ -7,7 +7,7 @@ Copyright (c) 2020 [AgilexRobot](http://www.agilex.ai/)
 
 ## Introduction
 
-Supported platforms
+Supported platforms/所支持的平台
 
 * **Scout**: skid-steer mobile base
 * **Hunter**: ackermann mobile base
@@ -15,11 +15,11 @@ Supported platforms
 * **Tracer**: skid-steer mobile base
 * **Scout-mini**: skid-steer mobile base
 
-This software packages provides a C++ interface to communicate with the mobile platforms from Agilex Robot, for sending commands to the robot and acquiring the latest robot state. The SDK works on both x86 and ARM platforms.
+这个软件包提供了一个C++接口，用于与AGILX机器人的移动平台通信，用于向机器人发送命令并获取最新的机器人状态。SDK可以在x86和ARM平台上工作。
 
-Generally, you only need to instantiate an object of the robot base class (such as ScoutBase), then use the object to programmatically control the robot. Internally, the base class manages two background threads, one to process CAN/UART messages of the robot state and accordingly update state variables in the robot state data structure, and the other to maintain a 50Hz loop and send the latest command to the robot base. User can iteratively perform tasks in the main thread and check the robot state or set control commands. 
+通常，您只需要实例化robot基类的一个对象（如ScoutBase），然后使用该对象以编程方式控制robot。在内部，基类管理两个后台线程，一个用于处理机器人状态的CAN/UART消息并相应地更新机器人状态数据结构中的状态变量，另一个用于维护50Hz循环并向机器人库发送最新命令。用户可以在主线程中迭代执行任务，并检查robot状态或设置控制命令。
 
-Refer to "src/apps" for examples.
+有关示例，请参阅“src/apps”。
 
 ## Hardware Interface
 
@@ -37,11 +37,11 @@ Refer to "src/apps" for examples.
    ```
    $ ifconfig -a
    ```
-4. Install and use can-utils to test the hardware
+4. Install and use can-utils to test the hardware/用 can-utils 测试实物硬件
     ```
     $ sudo apt install can-utils
     ```
-5. Testing command
+5. Testing command/测试指令
     ```
     # receiving data from can0
     $ candump can0
@@ -49,17 +49,16 @@ Refer to "src/apps" for examples.
     $ cansend can0 001#1122334455667788
     ```
 
-Two scripts inside the "./scripts" folder are provided for easy setup. You can run "./setup_can2usb.bash" for the first-time setup and run "./bringup_can2usb.bash" to bring up the device each time you unplug and re-plug the adapter.
+“/scripts”文件夹中提供了两个脚本，便于设置。您可以运行“/setup\u can2usb.bash”进行首次安装，并在每次拔下并重新插入适配器时运行“/bringup\u can2usb.bash”启动设备。
 
 ### Setup UART
 
-Generally your UART2USB cable should be automatically recognized as "/dev/ttyUSB0" or something similar and ready for use. If you get the error "... permission denied ..." when trying to open the port, you need to grant access of the port to your user accout:
+通常情况下，您的UART2USB应自动识别为“/dev/ttyUSB0”或类似类型，并可随时使用。如果您得到错误“... permission denied ...”尝试打开端口时，您需要将端口访问权限授予您的用户帐户：
 
 ```
 $ sudo usermod -a -G dialout $USER
 ```
-
-You need to re-login to get the change to take effect.
+您需要重新登录以使更改生效。
 
 ## Build SDK
 
